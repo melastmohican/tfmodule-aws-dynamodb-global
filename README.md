@@ -21,50 +21,61 @@ Module source can be instantiated multiple times, add as many times as many tabl
 
 ```
 module "dynamodb" {
-  source      = "git::ssh://git@bitbucket.corporate.t-mobile.com/soc/pfm-tfmodule-dynamodb.git"
+  source      = "git::https://github.com/melastmohican/tfmodule-aws-dynamodb-global"
   environment = var.environment
   table_name  = "${upper(var.environment)}_ABC_TABLE"
   attribute_list = [
     {
-      name = "ID"
+      name = "convState"
       type = "S"
     },
     {
-      name = "TYPE"
+      name = "id"
+      type = "S"
+    },
+    {
+      name = "tag"
       type = "S"
     }
   ]
-
-  hash_key  = "ID"
-  range_key = "TYPE"
-  
+  hash_key  = "id"
+  range_key = "tag"
   tags = {
     Application = "Example"
-    Environment = "Non-production"
+    Environment = "Non-production::${upper(var.environment)}"
     Owner       = "devops@example.org"
     Role        = "DataSource"
-
   }
-  global_secondary_index_list = [
-    {
-      hash_key           = "TYPE"
-      range_key          = "ID"
-      name               = "TYPE-ID-index"
-      non_key_attributes = []
-      projection_type    = "ALL"
-      read_capacity      = 0
-      write_capacity     = 0
-    }
-  ]
+
+  global_secondary_index_list = [{
+    hash_key           = "convState"
+    range_key          = null
+    name               = "convState-index"
+    non_key_attributes = []
+    projection_type    = "ALL"
+    read_capacity      = 0
+    write_capacity     = 0
+  }]
 
   local_secondary_index_list = []
 
-  ttl_list = []#
+  ttl_list = [{
+    attribute_name = "expirationTime"
+    enabled        = true
+  }]
 
   providers = {
     aws.us-west-2 = aws.us-west-2
     aws.us-east-1 = aws.us-east-1
   }
+}
+
+provider "aws" {
+  alias = "us-west-2"
+}
+
+provider "aws" {
+  alias = "us-east-1"
 }
 
 ```
@@ -144,11 +155,11 @@ Terraform will perform the following actions:
       + stream_label     = (known after apply)
       + stream_view_type = "NEW_AND_OLD_IMAGES"
       + tags             = {
-          + "Application" = "Social"
+          + "Application" = "Example"
           + "Environment" = "Non-production"
-          + "Owner"       = "smpd_devops@t-mobile.com"
+          + "Owner"       = "devops@example.org"
           + "Role"        = "DataSource"
-          + "Stack"       = "Messaging"
+          + "Stack"       = "Example"
         }
       + write_capacity   = 0
 
@@ -195,11 +206,11 @@ Terraform will perform the following actions:
       + stream_label     = (known after apply)
       + stream_view_type = "NEW_AND_OLD_IMAGES"
       + tags             = {
-          + "Application" = "Social"
+          + "Application" = "Example"
           + "Environment" = "Non-production"
-          + "Owner"       = "smpd_devops@t-mobile.com"
+          + "Owner"       = "devops@example.org"
           + "Role"        = "DataSource"
-          + "Stack"       = "Messaging"
+          + "Stack"       = "Example"
         }
       + write_capacity   = 0
 
@@ -277,11 +288,11 @@ Terraform will perform the following actions:
       + stream_label     = (known after apply)
       + stream_view_type = "NEW_AND_OLD_IMAGES"
       + tags             = {
-          + "Application" = "Social"
+          + "Application" = "Example"
           + "Environment" = "Non-production"
-          + "Owner"       = "smpd_devops@t-mobile.com"
+          + "Owner"       = "devops@example.org"
           + "Role"        = "DataSource"
-          + "Stack"       = "Messaging"
+          + "Stack"       = "Example"
         }
       + write_capacity   = 0
 
@@ -328,11 +339,11 @@ Terraform will perform the following actions:
       + stream_label     = (known after apply)
       + stream_view_type = "NEW_AND_OLD_IMAGES"
       + tags             = {
-          + "Application" = "Social"
+          + "Application" = "Example"
           + "Environment" = "Non-production"
-          + "Owner"       = "smpd_devops@t-mobile.com"
+          + "Owner"       = "devops@example.org"
           + "Role"        = "DataSource"
-          + "Stack"       = "Messaging"
+          + "Stack"       = "Example"
         }
       + write_capacity   = 0
 
@@ -426,11 +437,11 @@ Terraform will perform the following actions:
       - stream_label     = "2020-03-12T05:36:47.046" -> null
       - stream_view_type = "NEW_AND_OLD_IMAGES" -> null
       - tags             = {
-          - "Application" = "Social"
+          - "Application" = "Example"
           - "Environment" = "Non-production"
-          - "Owner"       = "smpd_devops@t-mobile.com"
+          - "Owner"       = "devops@example.org"
           - "Role"        = "DataSource"
-          - "Stack"       = "Messaging"
+          - "Stack"       = "Example"
         } -> null
       - write_capacity   = 0 -> null
 
@@ -476,11 +487,11 @@ Terraform will perform the following actions:
       - stream_label     = "2020-03-12T05:36:46.848" -> null
       - stream_view_type = "NEW_AND_OLD_IMAGES" -> null
       - tags             = {
-          - "Application" = "Social"
+          - "Application" = "Example"
           - "Environment" = "Non-production"
-          - "Owner"       = "smpd_devops@t-mobile.com"
+          - "Owner"       = "devops@example.org"
           - "Role"        = "DataSource"
-          - "Stack"       = "Messaging"
+          - "Stack"       = "Example"
         } -> null
       - write_capacity   = 0 -> null
 
