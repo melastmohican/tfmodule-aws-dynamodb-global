@@ -400,7 +400,7 @@ Terraform will perform the following actions:
 
   # module.dynamodb.aws_dynamodb_global_table.global_table will be destroyed
   - resource "aws_dynamodb_global_table" "global_table" {
-      - arn  = "arn:aws:dynamodb::257754337297:global-table/DEV_ABC_TABLE" -> null
+      - arn  = "arn:aws:dynamodb::***************:global-table/DEV_ABC_TABLE" -> null
       - id   = "DEV_ABC_TABLE" -> null
       - name = "DEV_ABC_TABLE" -> null
 
@@ -414,14 +414,14 @@ Terraform will perform the following actions:
 
   # module.dynamodb.aws_dynamodb_table.table_east will be destroyed
   - resource "aws_dynamodb_table" "table_east" {
-      - arn              = "arn:aws:dynamodb:us-east-1:257754337297:table/DEV_ABC_TABLE" -> null
+      - arn              = "arn:aws:dynamodb:us-east-1:***************:table/DEV_ABC_TABLE" -> null
       - billing_mode     = "PAY_PER_REQUEST" -> null
       - hash_key         = "ID" -> null
       - id               = "DEV_ABC_TABLE" -> null
       - name             = "DEV_ABC_TABLE" -> null
       - range_key        = "TYPE" -> null
       - read_capacity    = 0 -> null
-      - stream_arn       = "arn:aws:dynamodb:us-east-1:257754337297:table/DEV_ABC_TABLE/stream/2020-03-12T05:36:47.046" -> null
+      - stream_arn       = "arn:aws:dynamodb:us-east-1:***************:table/DEV_ABC_TABLE/stream/2020-03-12T05:36:47.046" -> null
       - stream_enabled   = true -> null
       - stream_label     = "2020-03-12T05:36:47.046" -> null
       - stream_view_type = "NEW_AND_OLD_IMAGES" -> null
@@ -464,14 +464,14 @@ Terraform will perform the following actions:
 
   # module.dynamodb.aws_dynamodb_table.table_west will be destroyed
   - resource "aws_dynamodb_table" "table_west" {
-      - arn              = "arn:aws:dynamodb:us-west-2:257754337297:table/DEV_ABC_TABLE" -> null
+      - arn              = "arn:aws:dynamodb:us-west-2:***************:table/DEV_ABC_TABLE" -> null
       - billing_mode     = "PAY_PER_REQUEST" -> null
       - hash_key         = "ID" -> null
       - id               = "DEV_ABC_TABLE" -> null
       - name             = "DEV_ABC_TABLE" -> null
       - range_key        = "TYPE" -> null
       - read_capacity    = 0 -> null
-      - stream_arn       = "arn:aws:dynamodb:us-west-2:257754337297:table/DEV_ABC_TABLE/stream/2020-03-12T05:36:46.848" -> null
+      - stream_arn       = "arn:aws:dynamodb:us-west-2:***************:table/DEV_ABC_TABLE/stream/2020-03-12T05:36:46.848" -> null
       - stream_enabled   = true -> null
       - stream_label     = "2020-03-12T05:36:46.848" -> null
       - stream_view_type = "NEW_AND_OLD_IMAGES" -> null
